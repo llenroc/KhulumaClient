@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="KhulumaClient.GroupChatPage"
+		Title="Group Chat and Info Portal">
+	
+
+	<ContentPage.Content>
+
+	<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
+
+
+				<ListView x:Name="chatListView">
+					<ListView.ItemTemplate>
+
+					<DataTemplate>
+
+					<ViewCell>
+							<Grid>
+								<Grid.RowDefinitions>
+								    <RowDefinition Height="*" />
+								    <RowDefinition Height="*" />
+
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="2*" />
+								</Grid.ColumnDefinitions>
+									
+								<Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="#ab74af" FontAttributes="Bold" FontSize="10" />
+								<Label Grid.Column="1" Grid.Row="0" Text="{Binding timestampString}" HorizontalTextAlignment="End" FontSize="8" FontAttributes="Italic" />
+								<Label Text="{Binding Message}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" FontSize="10" />
+
+							</Grid>
+						
+					</ViewCell>
+						
+					
+								
+					</DataTemplate>
+
+					
+					</ListView.ItemTemplate>
+
+
+				</ListView>
+
+
+
+
+			<Entry x:Name="MessageBox" Placeholder="Message..." />
+			<Button x:Name="SendButton" Text="Send" />
+			
+		</StackLayout>
+
+		
+	</ContentPage.Content>
+</ContentPage>
