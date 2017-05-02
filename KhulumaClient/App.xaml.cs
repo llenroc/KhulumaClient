@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using KhulumaClient.Views;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -36,7 +37,8 @@ namespace KhulumaClient
 				else
 				{
 
-					MainPage = new NavigationPage(new RegisterPage());
+                    //MainPage = new NavigationPage(new RegisterPage());
+                    MainPage = new NavigationPage(new IntroPage());
 
 				}
 

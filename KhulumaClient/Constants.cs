@@ -10,7 +10,7 @@ namespace KhulumaClient
 		public static string Username = "user";
 		public static string Password = "pass";
 
-		public static string baseUri = "http://khuluma.azurewebsites.net";
+		public static string baseUri = "http://khulumaserver.azurewebsites.net";
 		public static string apiLocationsUrl = "/api/APILocations";
 		public static string apiAppUsersUrl = "/api/APIAppUsers";
 		public static string apiChatMessagesUrl = "/api/APIChatMessage";

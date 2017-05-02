@@ -55,6 +55,7 @@ namespace KhulumaClient
 			buttonSave.IsEnabled = false;
 			userModel appUser = new userModel();
 
+            
 
 			var ageIndex = agesList.Items[agesList.SelectedIndex];
 			int age = Convert.ToInt32(ageIndex);
@@ -68,26 +69,33 @@ namespace KhulumaClient
 			appUser.Email = inputEmail.Text;
 			appUser.LocationId = locationsList.SelectedIndex+1;
 
+            if (appUser.Username == "" || appUser.Name == "" || appUser.Surname == "" || appUser.Gender == "None selected" || appUser.PhoneNumber == "" || appUser.Email == "")
+            {
+                await DisplayAlert("Alert", "Please fill in all fields", "OK");
+            } else
+            {
+                await restService.PostUser(appUser);
 
-			await restService.PostUser(appUser);
+                if (Helpers.Settings.isRegistered == true)
+                {
+                    buttonGotoChat.IsVisible = true;
+                    buttonGotoChat.IsEnabled = true;
 
-			if (Helpers.Settings.isRegistered==true)
-			{
-				buttonGotoChat.IsVisible = true;
-				buttonGotoChat.IsEnabled = true;
+                    await DisplayAlert("Registered Success", "You have been registered with the following settings: " + System.Environment.NewLine +
+                                 "Username: " + appUser.Username +
+                                 "Name: " + appUser.Name +
+                                 "Surname: " + appUser.Surname +
+                                 "Age: " + appUser.Age +
+                                 "Gender: " + appUser.Gender +
+                                 "Phone Number: " + appUser.PhoneNumber +
+                                 "Email: " + appUser.Email +
+                                 "Location Id: " + appUser.LocationId,
+                                       "OK");
 
-				await DisplayAlert("Registered Success", "You have been registered with the following settings: " + System.Environment.NewLine +
-							 "Username: " + appUser.Username +
-							 "Name: " + appUser.Name +
-							 "Surname: " + appUser.Surname +
-							 "Age: " + appUser.Age +
-							 "Gender: " + appUser.Gender +
-							 "Phone Number: " + appUser.PhoneNumber +
-							 "Email: " + appUser.Email +
-							 "Location Id: " + appUser.LocationId,
-								   "OK");
+                }
+            }
 
-			}
+            
 
 
 

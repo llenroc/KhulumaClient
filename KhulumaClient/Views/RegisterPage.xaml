@@ -21,21 +21,21 @@
 				</StackLayout.Resources>
 
 
-			
+                <Label Text="* Required field (All fields are required)" />
 
-			<Label Text="Username" />
+                <Label Text="*Username" />
 			<Entry x:Name="inputUsername" />
 
-			<Label Text="Name" />
+			<Label Text="*Name" />
 			<Entry x:Name="inputName" />
 
-			<Label Text="Surname" />
+			<Label Text="*Surname" />
 			<Entry x:Name="inputSurname" />
 
-			<Label Text="Age" />
+			<Label Text="*Age" />
 			<Picker x:Name="agesList" />		
 
-			<Label Text="Gender" />
+			<Label Text="*Gender" />
 			<Picker x:Name="gendersList">
 				<Picker.Items>
 					<x:String>None selected</x:String>
@@ -46,13 +46,13 @@
 				</Picker.Items>
 			</Picker>
 			
-			<Label Text="Phone Number" />
+			<Label Text="*Phone Number" />
 			<Entry x:Name="inputTelephone" />
 
-			<Label Text="Email" />
+			<Label Text="*Email" />
 			<Entry x:Name="inputEmail" />
 
-			<Label Text="Location / Hospital" />
+			<Label Text="*Location / Hospital" />
 			<Picker x:Name="locationsList" />
 
 			<Button x:Name="buttonSave" Text="Register" Clicked="Handle_Clicked" />
