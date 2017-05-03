@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
-namespace KhulumaClient
+namespace KhulumaClient.Views
 {
-	public partial class SingleItemPage : ContentPage
-	{
-		public SingleItemPage()
-		{
-			InitializeComponent();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SingleItemPage : ContentPage
+    {
+        public SingleItemPage()
+        {
+            InitializeComponent();
+        }
+    }
 }

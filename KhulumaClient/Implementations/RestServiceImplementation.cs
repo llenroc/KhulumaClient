@@ -19,6 +19,8 @@ namespace KhulumaClient
 		public List<FlaggedContentModel> FlaggedContent { get; private set; }
 		public List<ChatModel> Chats { get; private set;}
 
+        public userModel thisUser { get; set; }
+
 		public RestServiceImplementation() 
 		{
 			var authData = string.Format("{0}:{1}", Constants.Username, Constants.Password);
@@ -28,6 +30,32 @@ namespace KhulumaClient
 			client.MaxResponseContentBufferSize = 256000;
 			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
 		}
+
+        //Get User
+        public async Task<userModel> GetThisUser()
+        {
+            thisUser = new userModel();
+            var thisUserID = Helpers.Settings.id;
+            var uri = new Uri(string.Format(Constants.baseUri + Constants.apiAppUsersUrl + "/" + thisUserID));
+
+            try
+            {
+                var response = await client.GetAsync(uri);
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    thisUser = JsonConvert.DeserializeObject<userModel>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"ERROR: {0}", ex.Message);
+            }
+
+            return thisUser;
+        }
+
 
 		// Get locations
 		public async Task<List<locationModel>> GetLocationsAsync()
@@ -59,7 +87,14 @@ namespace KhulumaClient
 		public async Task<List<ChatModel>> GetChatsAsync()
 		{
 			Chats = new List<ChatModel>();
-			var uri = new Uri(string.Format(Constants.baseUri + Constants.apiChatMessagesUrl, string.Empty));
+
+            var userID = Helpers.Settings.id;
+
+
+
+            //var groupChatsListurl = "APIChatMessages/" + groupID + "/groupMessages";
+
+            var uri = new Uri(string.Format(Constants.baseUri + Constants.apiChatMessagesUrl, string.Empty));
 
 			try
 			{
@@ -85,10 +120,12 @@ namespace KhulumaClient
 		public async Task PostUser(userModel user)
 		{
 			Debug.WriteLine("Post User: ");
-
+            int groupID = Helpers.Settings.GroupId;
 			userModel responseAppUser = new userModel();
 
-			var uri = new Uri(string.Format(Constants.baseUri + Constants.apiAppUsersUrl, string.Empty));
+            
+
+            var uri = new Uri(string.Format(Constants.baseUri + Constants.apiAppUsersUrl, string.Empty));
 
 			try
 			{

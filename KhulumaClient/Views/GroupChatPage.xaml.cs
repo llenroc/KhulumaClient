@@ -13,9 +13,12 @@ namespace KhulumaClient
 	{
 
 		public ObservableCollection<ChatModel> chatItems { get; set; }
-		List<ChatModel> Chats;
+        public string ChatGroupName { get; set; }
 
-		HubConnection hubConnection = new HubConnection("http://khuluma.azurewebsites.net");
+        List<ChatModel> Chats;
+        public userModel thisUser { get; set; }
+
+		HubConnection hubConnection = new HubConnection("http://khulumaserver.azurewebsites.net");
 		IRestService restService;
 
 
@@ -24,14 +27,17 @@ namespace KhulumaClient
 		public GroupChatPage()
 		{
 			InitializeComponent();
+            
+
+            thisUser = new userModel();
 
 			var chatHubProxy = hubConnection.CreateHubProxy("ChatHub");
 			restService = new RestServiceImplementation();
 
 			ToolbarItem itemMenu = new ToolbarItem
 			{
-				Text = "Menu",
-				Order = ToolbarItemOrder.Primary
+				Text = "Who We Are",
+				Order = ToolbarItemOrder.Secondary
 			};
 
 			itemMenu.Clicked += itemMenuClicked;
@@ -65,7 +71,7 @@ namespace KhulumaClient
 				Debug.WriteLine("I've been clicked");
 				int userid = Helpers.Settings.id;
 				int groupid = Helpers.Settings.GroupId;
-
+                string groupName = ChatGroupName;
 				var message = MessageBox.Text;
 				MessageBox.Text = "";
 
@@ -73,7 +79,7 @@ namespace KhulumaClient
 
 				try
 				{
-					await chatHubProxy.Invoke("Send", new object[] { name, message, userid, groupid });
+					await chatHubProxy.Invoke("Send", new object[] { name, message, userid, groupName, groupid });
 
 				}
 				catch (Exception ex)
@@ -94,23 +100,40 @@ namespace KhulumaClient
 			base.OnAppearing();
 
 			Chats = await restService.GetChatsAsync();
+            thisUser = await restService.GetThisUser();
+            var groupID = thisUser.GroupId;
+            Debug.WriteLine("THIS User GroupID: {0}", thisUser.GroupId);
+
+            if (groupID == 0)
+            {
+                await DisplayAlert("Alert", "You have not been assigned to a group yet, please contact your administrator", "OK");
+            } else
+            {
+                ChatGroupName = thisUser.GroupName;
+                this.Title = "Group Chat: " + thisUser.GroupName;
+
+                Helpers.Settings.GroupId = groupID;
+                
+
+                foreach (ChatModel chat in Chats)
+                {
+                    if (chat.Name == null) chat.Name = "Guest";
+
+                    displayChat(chat.Name, chat.timestampString, chat.Message);
+
+                }
+            }
 
 
-			foreach (ChatModel chat in Chats)
-			{
-				if (chat.Name == null) chat.Name = "Guest";
-
-				displayChat(chat.Name, chat.timestampString, chat.Message);
-
-			}
+			
 
 	
 		}
 
 		async void itemMenuClicked(object sender, EventArgs e)
 		{
-
-
+           
+            await Navigation.PushAsync(new SingleItemPage());
 
 		}
 

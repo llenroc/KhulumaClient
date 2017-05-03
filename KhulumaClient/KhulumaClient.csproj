@@ -43,9 +43,6 @@
     <EmbeddedResource Include="Views\TabbedContentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SingleItemPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\DataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -81,17 +78,22 @@
     <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\MobilePageModel.cs" />
     <Compile Include="Models\FlaggedContentModel.cs" />
-    <Compile Include="Views\TabbedContentPage.xaml.cs">
-      <DependentUpon>TabbedContentPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SingleItemPage.xaml.cs">
       <DependentUpon>SingleItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TabbedContentPage.xaml.cs">
+      <DependentUpon>TabbedContentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DataPage.xaml.cs">
       <DependentUpon>DataPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SingleItemPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>

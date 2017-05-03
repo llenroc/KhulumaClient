@@ -11,7 +11,7 @@
 	<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
 
 
-				<ListView x:Name="chatListView">
+				<ListView x:Name="chatListView" HasUnevenRows="True">
 					<ListView.ItemTemplate>
 
 					<DataTemplate>
@@ -28,9 +28,9 @@
 									<ColumnDefinition Width="2*" />
 								</Grid.ColumnDefinitions>
 									
-								<Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="#ab74af" FontAttributes="Bold" FontSize="10" />
-								<Label Grid.Column="1" Grid.Row="0" Text="{Binding timestampString}" HorizontalTextAlignment="End" FontSize="8" FontAttributes="Italic" />
-								<Label Text="{Binding Message}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" FontSize="10" />
+								<Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="#ab74af" FontAttributes="Bold" FontSize="9" />
+
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Message}" Grid.ColumnSpan="2" FontSize="10" />
 
 							</Grid>
 						
@@ -49,7 +49,7 @@
 
 
 
-			<Entry x:Name="MessageBox" Placeholder="Message..." />
+			<Entry x:Name="MessageBox" Placeholder="Message..." Keyboard="Chat" />
 			<Button x:Name="SendButton" Text="Send" />
 			
 		</StackLayout>

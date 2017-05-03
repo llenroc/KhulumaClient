@@ -68,6 +68,7 @@ namespace KhulumaClient
 			appUser.PhoneNumber = inputTelephone.Text;
 			appUser.Email = inputEmail.Text;
 			appUser.LocationId = locationsList.SelectedIndex+1;
+            appUser.GroupId = 0;
 
             if (appUser.Username == "" || appUser.Name == "" || appUser.Surname == "" || appUser.Gender == "None selected" || appUser.PhoneNumber == "" || appUser.Email == "")
             {
