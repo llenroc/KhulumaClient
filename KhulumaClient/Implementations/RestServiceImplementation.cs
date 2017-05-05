@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using System.Diagnostics;
+using KhulumaClient.Models;
 
 namespace KhulumaClient
 {
@@ -117,11 +118,11 @@ namespace KhulumaClient
 
 
 		//Create App User Account
-		public async Task PostUser(userModel user)
+		public async Task PostUser(PostUserModel user)
 		{
 			Debug.WriteLine("Post User: ");
-            int groupID = Helpers.Settings.GroupId;
-			userModel responseAppUser = new userModel();
+            
+			AppUserModel responseAppUser = new AppUserModel();
 
             
 
@@ -142,7 +143,7 @@ namespace KhulumaClient
 					var newcontent = await response.Content.ReadAsStringAsync();
 
 
-					responseAppUser = JsonConvert.DeserializeObject<userModel>(newcontent);
+					responseAppUser = JsonConvert.DeserializeObject<AppUserModel>(newcontent);
 
 					Debug.WriteLine("Returned User: {0}, ID: {1}", responseAppUser.Name, responseAppUser.ID);
 
@@ -156,7 +157,7 @@ namespace KhulumaClient
 					Helpers.Settings.Email = responseAppUser.Email;
 					Helpers.Settings.PhoneNumber = responseAppUser.PhoneNumber;
 					Helpers.Settings.HomeAddress = responseAppUser.HomeAddress;
-					Helpers.Settings.LocationId = responseAppUser.LocationId;
+					Helpers.Settings.LocationId = Convert.ToInt32(responseAppUser.LocationId);
 					//Helpers.Settings.GroupId = responseAppUser.GroupId;
 
 					Helpers.Settings.isRegistered = true;

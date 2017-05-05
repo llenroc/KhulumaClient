@@ -4,9 +4,25 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="KhulumaClient.GroupChatPage"
 		Title="Group Chat and Info Portal">
-	
 
-	<ContentPage.Content>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="nameText" TargetType="Label">
+                <Setter Property="TextColor" Value="#ab74af" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+                
+            </Style>
+            <Style x:Key="messageText" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="#ddd"/>
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BorderRadius" Value="4"/>
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
 
 	<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
 
@@ -16,24 +32,25 @@
 
 					<DataTemplate>
 
-					<ViewCell>
-							<Grid>
-								<Grid.RowDefinitions>
-								    <RowDefinition Height="*" />
-								    <RowDefinition Height="*" />
+                    <ViewCell>
 
-								</Grid.RowDefinitions>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="2*" />
-								</Grid.ColumnDefinitions>
-									
-								<Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="#ab74af" FontAttributes="Bold" FontSize="9" />
-
-                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Message}" Grid.ColumnSpan="2" FontSize="10" />
-
-							</Grid>
-						
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="10" />
+                                    
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            
+                            <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1"  Style="{StaticResource nameText}" />
+                            <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="2" Style="{StaticResource messageText}" />
+                            
 					</ViewCell>
 						
 					

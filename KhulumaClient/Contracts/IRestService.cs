@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KhulumaClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace KhulumaClient
 
 
 		// Create user
-		Task PostUser(userModel appuser);
+		Task PostUser(PostUserModel appuser);
 
         // Get user
         Task<userModel> GetThisUser();

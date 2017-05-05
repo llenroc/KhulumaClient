@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using Xamarin.Forms;
+using KhulumaClient.Views;
 
 namespace KhulumaClient
 {
@@ -17,8 +18,10 @@ namespace KhulumaClient
 
         List<ChatModel> Chats;
         public userModel thisUser { get; set; }
+        public Page userProfilePage;
 
-		HubConnection hubConnection = new HubConnection("http://khulumaserver.azurewebsites.net");
+
+        HubConnection hubConnection = new HubConnection("http://khulumaserver.azurewebsites.net");
 		IRestService restService;
 
 
@@ -34,15 +37,17 @@ namespace KhulumaClient
 			var chatHubProxy = hubConnection.CreateHubProxy("ChatHub");
 			restService = new RestServiceImplementation();
 
-			ToolbarItem itemMenu = new ToolbarItem
+			ToolbarItem itemAbout = new ToolbarItem
 			{
 				Text = "Who We Are",
 				Order = ToolbarItemOrder.Secondary
 			};
 
-			itemMenu.Clicked += itemMenuClicked;
+            itemAbout.Clicked += itemMenuClicked;
 
-			ToolbarItems.Add(itemMenu);
+			ToolbarItems.Add(itemAbout);
+
+            
 
 			GetInfo();
 
@@ -95,7 +100,15 @@ namespace KhulumaClient
 
 		}
 
-		protected async override void OnAppearing()
+        public async void ItemProfile_Clicked(object sender, EventArgs e)
+        {
+            userProfilePage = new UserProfilePage();
+            userProfilePage.BindingContext = thisUser;
+
+            await Navigation.PushModalAsync(userProfilePage);
+        }
+
+        protected async override void OnAppearing()
 		{
 			base.OnAppearing();
 

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KhulumaClient.Views.UserProfilePage">
+
+    <ScrollView>
+
+        <StackLayout Padding="10">
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Label">
+                        <Setter Property="Margin" Value="0, 30, 0, 0" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="TextColor" Value="#b3ce4f" />
+
+                    </Style>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+
+
+            <Label Text="A new user has been created with the following details:" FontSize="Large" HorizontalTextAlignment="Center" />
+
+            <Label Text="Username" />
+            <Label Text="{Binding Username}" TextColor="Black" />
+
+
+            <Label Text="Name" />
+            <Label Text="{Binding Name}" TextColor="Black" />
+
+            <Label Text="Surname" />
+            <Label Text="{Binding Surname}" TextColor="Black" />
+
+            <Label Text="Age" />
+            <Label Text="{Binding Age}" TextColor="Black" />
+
+            <Label Text="Gender" />
+            <Label Text="{Binding Gender}" TextColor="Black" />
+
+            <Label Text="Phone Number" />
+            <Label Text="{Binding PhoneNumber}" TextColor="Black" />
+
+            <Label Text="Email" />
+            <Label Text="{Binding Email}" TextColor="Black" />
+
+            <Button x:Name = "buttonModalClose" Text="Close" Clicked="modalClose" />
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

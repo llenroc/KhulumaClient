@@ -55,14 +55,12 @@
 			<Label Text="*Location / Hospital" />
 			<Picker x:Name="locationsList" />
 
-			<Button x:Name="buttonSave" Text="Register" Clicked="Handle_Clicked" />
-			<Button x:Name = "buttonGotoChat" Text="Continue" IsEnabled="false" IsVisible="false" Clicked="newPage" />
+                <Button x:Name="buttonSave" Text="Register" Clicked="Handle_Clicked" />
+                <Button x:Name = "buttonGotoChat" Text="Continue" IsEnabled="False" IsVisible="False" Clicked="newPage" />
+            </StackLayout>
 
-
-
-			
-		</StackLayout>
-	</ScrollView>
+            
+        </ScrollView>
 
 
 		

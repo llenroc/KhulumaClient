@@ -14,7 +14,7 @@ namespace KhulumaClient.Views
     {
         public SingleItemPage()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

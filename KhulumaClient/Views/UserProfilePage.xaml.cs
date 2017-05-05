@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KhulumaClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,17 @@ using Xamarin.Forms.Xaml;
 
 namespace KhulumaClient.Views
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class IntroPage : CarouselPage
+    public partial class UserProfilePage : ContentPage
     {
-        public IntroPage()
+        public UserProfilePage()
         {
             InitializeComponent();
         }
 
-        private void Register_Clicked(object sender, EventArgs e)
+        async void modalClose(object sender, EventArgs args)
         {
-            Page newpage = new RegisterPage();
-            Navigation.PushAsync(newpage);
-            //Navigation.PushModalAsync(newpage);
+            await Navigation.PopModalAsync();
         }
     }
 }
