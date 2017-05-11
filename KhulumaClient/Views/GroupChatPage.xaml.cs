@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using Xamarin.Forms;
 using KhulumaClient.Views;
+using System.Text.RegularExpressions;
 
 namespace KhulumaClient
 {
@@ -15,10 +16,12 @@ namespace KhulumaClient
 
 		public ObservableCollection<ChatModel> chatItems { get; set; }
         public string ChatGroupName { get; set; }
-
         List<ChatModel> Chats;
         public userModel thisUser { get; set; }
         public Page userProfilePage;
+        public List<FlaggedContentModel> flaggedContentList;
+        List<String> flaggedStringList;
+        bool isFlagged;
 
 
         HubConnection hubConnection = new HubConnection("http://khulumaserver.azurewebsites.net");
@@ -30,7 +33,7 @@ namespace KhulumaClient
 		public GroupChatPage()
 		{
 			InitializeComponent();
-            
+            isFlagged = false;
 
             thisUser = new userModel();
 
@@ -51,15 +54,19 @@ namespace KhulumaClient
 
 			GetInfo();
 
-			chatItems = new ObservableCollection<ChatModel>();
-
-			chatListView.ItemsSource = chatItems;
+			
 
 
-
-			chatHubProxy.On<string, string, string>("addNewMessageToPage", (name, message, timestamp) =>
+            chatHubProxy.On<string, string, string, int>("addNewMessageToPage", (name, message, timestamp, groupid) =>
 			{
-				displayChat(name, timestamp, message);
+
+                if (groupid == thisUser.GroupId)
+                {
+                    
+                    displayChat(name, timestamp, message);
+                }
+
+                
 			});
 
 			chatHubProxy.On<string, string, string>("quartzJobExecuted", (name, message, hournow) =>
@@ -78,13 +85,21 @@ namespace KhulumaClient
 				int groupid = Helpers.Settings.GroupId;
                 string groupName = ChatGroupName;
 				var message = MessageBox.Text;
-				MessageBox.Text = "";
+
+                
+
+
+                MessageBox.Text = "";
 
 				var name = Helpers.Settings.Username;
 
 				try
 				{
-					await chatHubProxy.Invoke("Send", new object[] { name, message, userid, groupName, groupid });
+                    if (message.Length > 0)
+                    {
+                        await chatHubProxy.Invoke("Send", new object[] { name, message, userid, groupName, groupid, isFlagged });
+                    }
+                    
 
 				}
 				catch (Exception ex)
@@ -98,7 +113,116 @@ namespace KhulumaClient
 
 			};
 
-		}
+            MessageBox.TextChanged += OnTextChanged;
+
+            void OnTextChanged(object sender, EventArgs e)
+            {
+
+                var restrictCount = 250;
+                String val = MessageBox.Text; //Get Current Text
+
+                if (val.Length > restrictCount)//If it is more than your character restriction
+                {
+                    string sub = val.Substring(0, 250);
+
+                    MessageBox.Text = sub;
+
+                    //val = val.Remove(val.Length - 1);// Remove Last character 
+                    //Set the Old value
+                    val = sub;
+                }
+                String output;
+                foreach (var item in flaggedStringList)
+                {
+                    Debug.WriteLine("ITEM: {0}", item);
+                    Debug.WriteLine("VAL: {0}", val);
+                    output = val.Replace(item,"****");
+                    Debug.WriteLine("OUTPUT: {0}", output);
+
+                    val = output;
+
+                    
+
+                }
+
+                if (val.Contains("****")) isFlagged = true;
+
+                
+
+                MessageBox.Text = val;
+
+            }
+
+
+
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            int chatsCount;
+            int totalChats;
+            chatItems = new ObservableCollection<ChatModel>();
+            Chats = await restService.GetChatsAsync();
+            thisUser = await restService.GetThisUser();
+            flaggedContentList = new List<FlaggedContentModel>();
+            flaggedContentList = await restService.GetFlaggedContentAsync();
+
+            flaggedStringList = new List<string>();
+
+            foreach (FlaggedContentModel flag in flaggedContentList)
+            {
+                flaggedStringList.Add(flag.ContentText);
+            }
+
+
+            var groupID = thisUser.GroupId;
+            Debug.WriteLine("THIS User GroupID: {0}", thisUser.GroupId);
+
+            if (groupID == 0)
+            {
+                await DisplayAlert("Alert", "You have not been assigned to a group yet, please contact your administrator", "OK");
+            }
+            else
+            {
+                ChatGroupName = thisUser.GroupName;
+                this.Title = "Group Chat: " + thisUser.GroupName;
+
+                Helpers.Settings.GroupId = groupID;
+
+                
+                foreach (ChatModel chat in Chats)
+                {
+                    if (chat.Name == null) chat.Name = "Guest";
+
+                    Debug.WriteLine("CHAT: {0} : {1} ::: {2} :", chat.Name, chat.MessageTimestamp, chat.Message);
+
+                    Debug.WriteLine("INDEX: {0}", Chats.IndexOf(chat));
+                    chatsCount = Chats.IndexOf(chat);
+                    totalChats = Chats.Count;
+                    if (chatsCount>totalChats-20)
+                    {
+                        chatItems.Add(chat);
+                    }
+
+                 
+
+
+
+                }
+
+
+
+                chatListView.ItemsSource = chatItems;
+
+                var target = chatItems[chatItems.Count - 1];
+
+                chatListView.ScrollTo(target, ScrollToPosition.End, true);
+
+            }
+
+
+        }
 
         public async void ItemProfile_Clicked(object sender, EventArgs e)
         {
@@ -108,45 +232,12 @@ namespace KhulumaClient
             await Navigation.PushModalAsync(userProfilePage);
         }
 
-        protected async override void OnAppearing()
-		{
-			base.OnAppearing();
-
-			Chats = await restService.GetChatsAsync();
-            thisUser = await restService.GetThisUser();
-            var groupID = thisUser.GroupId;
-            Debug.WriteLine("THIS User GroupID: {0}", thisUser.GroupId);
-
-            if (groupID == 0)
-            {
-                await DisplayAlert("Alert", "You have not been assigned to a group yet, please contact your administrator", "OK");
-            } else
-            {
-                ChatGroupName = thisUser.GroupName;
-                this.Title = "Group Chat: " + thisUser.GroupName;
-
-                Helpers.Settings.GroupId = groupID;
-                
-
-                foreach (ChatModel chat in Chats)
-                {
-                    if (chat.Name == null) chat.Name = "Guest";
-
-                    displayChat(chat.Name, chat.timestampString, chat.Message);
-
-                }
-            }
-
-
-			
-
-	
-		}
+        
 
 		async void itemMenuClicked(object sender, EventArgs e)
 		{
            
-            await Navigation.PushAsync(new SingleItemPage());
+            await Navigation.PushAsync(new WhoWeArePage());
 
 		}
 
@@ -164,11 +255,14 @@ namespace KhulumaClient
 		}
 		public void displayChat(string name, string time, string message)
 		{
-			chatItems.Add(new ChatModel()
+
+            Debug.WriteLine("CHAT: {0} : {1} ::: {2} :", name, time, message);
+
+            chatItems.Add(new ChatModel()
 			{
 				Name = name,
 				Message = message,
-				timestampString = time
+				MessageTimestamp = time
 
 			});
 

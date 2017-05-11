@@ -4,6 +4,7 @@
 
         <StackLayout x:Name="HTMLPage" VerticalOptions="StartAndExpand">
 
+            <Label Text="" />
 
 
         </StackLayout>

@@ -1,76 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-		xmlns="http://xamarin.com/schemas/2014/forms" 
-		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="KhulumaClient.GroupChatPage"
-		Title="Group Chat and Info Portal">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="KhulumaClient.GroupChatPage"
+             xmlns:local="clr-namespace:KhulumaClient.DataTemplates;assembly=KhulumaClient" Title="Group Chat and Info Portal">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="nameText" TargetType="Label">
-                <Setter Property="TextColor" Value="#ab74af" />
-                <Setter Property="FontSize" Value="Small" />
+
+
+            <local:TemplateSelector x:Key="TemplateSelector" />
+
+            <!--<Style x:Key="nameText" TargetType="Label">
+                
+                <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="HorizontalTextAlignment" Value="End" />
                 
             </Style>
             <Style x:Key="messageText" TargetType="Label">
-                <Setter Property="BackgroundColor" Value="#ddd"/>
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BorderRadius" Value="4"/>
-                <Setter Property="FontSize" Value="Large" />
-            </Style>
+                
+                <Setter Property="TextColor" Value="Black" />
+                
+                <Setter Property="FontSize" Value="Medium" />
+            </Style>-->
+
+
+
 
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
 
-	<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
 
+            <ListView x:Name="chatListView" HasUnevenRows="True" ItemTemplate="{StaticResource TemplateSelector}">
+                <!--<ListView.ItemTemplate>
 
-				<ListView x:Name="chatListView" HasUnevenRows="True">
-					<ListView.ItemTemplate>
+                    <DataTemplate>
 
-					<DataTemplate>
-
-                    <ViewCell>
+                        <ViewCell>
 
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="10" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="20" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="10" />
-                                    
+
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    
+
                                 </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1"  Style="{StaticResource nameText}" VerticalTextAlignment="Center" TextColor="#be76ae" />
+                                <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
+                                <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="3" Style="{StaticResource messageText}" />
+
                             </Grid>
-                            
-                            <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1"  Style="{StaticResource nameText}" />
-                            <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="2" Style="{StaticResource messageText}" />
-                            
-					</ViewCell>
-						
-					
-								
-					</DataTemplate>
-
-					
-					</ListView.ItemTemplate>
-
-
-				</ListView>
 
 
 
+                        </ViewCell>
 
-			<Entry x:Name="MessageBox" Placeholder="Message..." Keyboard="Chat" />
-			<Button x:Name="SendButton" Text="Send" />
-			
-		</StackLayout>
 
-		
-	</ContentPage.Content>
+
+                    </DataTemplate>
+
+
+                </ListView.ItemTemplate>-->
+
+
+            </ListView>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+
+
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+
+                <Entry Grid.Column="0" Grid.Row="0" x:Name="MessageBox" Placeholder="Message..." Keyboard="Chat" />
+                <Button Grid.Column="1" Grid.Row="0" x:Name="SendButton" Text="Send" />
+
+            </Grid>
+
+
+
+
+        </StackLayout>
+
+
+    </ContentPage.Content>
 </ContentPage>

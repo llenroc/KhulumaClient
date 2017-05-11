@@ -90,12 +90,13 @@ namespace KhulumaClient
 			Chats = new List<ChatModel>();
 
             var userID = Helpers.Settings.id;
+            var groupID = Helpers.Settings.GroupId;
 
 
 
-            //var groupChatsListurl = "APIChatMessages/" + groupID + "/groupMessages";
+            var groupChatsListurl = "/APIChatMessages/" + groupID + "/groupMessages";
 
-            var uri = new Uri(string.Format(Constants.baseUri + Constants.apiChatMessagesUrl, string.Empty));
+            var uri = new Uri(string.Format(Constants.baseUri + groupChatsListurl, string.Empty));
 
 			try
 			{
@@ -158,7 +159,7 @@ namespace KhulumaClient
 					Helpers.Settings.PhoneNumber = responseAppUser.PhoneNumber;
 					Helpers.Settings.HomeAddress = responseAppUser.HomeAddress;
 					Helpers.Settings.LocationId = Convert.ToInt32(responseAppUser.LocationId);
-					//Helpers.Settings.GroupId = responseAppUser.GroupId;
+					Helpers.Settings.GroupId = 1;
 
 					Helpers.Settings.isRegistered = true;
 
@@ -202,9 +203,30 @@ namespace KhulumaClient
 			return MobilePages;
 		}
 
-		public Task<List<FlaggedContentModel>> GetFlaggedContentAsync()
+		public async Task<List<FlaggedContentModel>> GetFlaggedContentAsync()
 		{
-			throw new NotImplementedException();
-		}
+            FlaggedContent = new List<FlaggedContentModel>();
+
+            var uri = new Uri(string.Format(Constants.baseUri + Constants.apiFlaggedContentUrl, string.Empty));
+
+            try
+            {
+                var response = await client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    FlaggedContent = JsonConvert.DeserializeObject<List<FlaggedContentModel>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"ERROR: {0}", ex.Message);
+            }
+
+            return FlaggedContent;
+
+        }
 	}
 }

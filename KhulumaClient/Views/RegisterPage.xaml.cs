@@ -28,17 +28,13 @@ namespace KhulumaClient
 			restService = new RestServiceImplementation();
 
 
-
-			if (locations != null)
-			{
-				
-			}
 		}
 
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-
+            buttonSave.IsEnabled = false;
+            buttonSave.Text = "LOADING";
             appUser = new PostUserModel();
             appTestUser = new AppUserModel();
 
@@ -56,7 +52,10 @@ namespace KhulumaClient
 			}
 			agesList.SelectedIndex = 10;
 			gendersList.SelectedIndex = 0;
-		}
+
+            buttonSave.IsEnabled = true;
+            buttonSave.Text = "REGISTER";
+        }
 
 		public async void Handle_Clicked(object sender, System.EventArgs e)
 		{
@@ -80,7 +79,7 @@ namespace KhulumaClient
 
             appUser.Surname = inputSurname.Text;
             
-            if (appTestUser.Username == "" || appTestUser.Name == "" || appTestUser.Surname == "" || appTestUser.Gender == "None selected" || appTestUser.PhoneNumber == "" || appTestUser.Email == "")
+            if (appUser.Username == "" || appUser.Name == "" || appUser.Surname == "" || appUser.Gender == "None selected" || appUser.PhoneNumber == "" || appUser.Email == "")
             {
                 await DisplayAlert("Alert", "Please fill in all fields", "OK");
                 buttonSave.IsEnabled = true;
@@ -96,6 +95,8 @@ namespace KhulumaClient
                     //SubmissionBox.IsVisible = true;
                     //SubmissionBox.IsEnabled = true;
 
+                    buttonSave.IsVisible = false;
+                    buttonSave.IsEnabled = false;
 
                     buttonGotoChat.IsEnabled = true;
                     buttonGotoChat.IsVisible = true;
@@ -123,7 +124,7 @@ namespace KhulumaClient
 
         public async void newPage(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new GroupChatPage());
+            await Navigation.PushAsync(new GroupChatPage());
 
         }
 

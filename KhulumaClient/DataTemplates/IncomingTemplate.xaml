@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KhulumaClient.DataTemplates.IncomingTemplate"
+             xmlns:local="clr-namespace:KhulumaClient;assembly=KhulumaClient">
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1"  Style="{StaticResource nameText}" VerticalTextAlignment="Center" TextColor="#be76ae" />
+            <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
+            <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="3" Style="{StaticResource messageText}" />
+
+        </Grid>
+ 
+    
+</ViewCell>

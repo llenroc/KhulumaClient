@@ -17,9 +17,10 @@ namespace KhulumaClient
 		public static string apiLocationsUrl = "/api/APILocationModels";
 		public static string apiAppUsersUrl = "/api/APIAppUserModels";
 		public static string apiChatMessagesUrl = "/api/APIChatMessage";
+
 		public static string apiMobilePagesUrl = "/api/APIMobilePagesModels";
 
-		public static string apiFlaggedContentUrl = "/api/APIFlaggedContent";
+		public static string apiFlaggedContentUrl = "/api/APIFlaggedContentModels";
 
 
 	}
