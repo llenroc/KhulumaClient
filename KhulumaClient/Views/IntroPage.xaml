@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KhulumaClient.Views.IntroPage"
              Title="Welcome to Khuluma">
-  <ContentPage >
+  <ContentPage x:Name="introMain">
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
       
-      <Label Text="Welcome to Khuluma support!" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" VerticalTextAlignment="Center" />
-            <Label HorizontalTextAlignment="Center" Text="Swipe right" />
+        <Label Text="Welcome to Khuluma support!" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" VerticalTextAlignment="Center" />
+        <Label HorizontalTextAlignment="Center" Text="Swipe right" />
 
+           
         </StackLayout>
   </ContentPage>
-    <ContentPage>
+  <ContentPage>
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
 
             <Label Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." 
@@ -20,6 +21,6 @@
             <Button Text="Register" Clicked="Register_Clicked"  />
 
         </StackLayout>
-    </ContentPage>
+  </ContentPage>
     
 </CarouselPage>

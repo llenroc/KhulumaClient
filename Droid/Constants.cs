@@ -16,6 +16,6 @@ namespace KhulumaClient.Droid
     {
         public const string SenderID = "950612846979"; // Google API Project Number
         public const string ListenConnectionString = "Endpoint=sb://khunotificationsnamespace.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Xoq5THimKs/HxRJXyb/BwDYvBOJngoKga4ZODR2h7aw=";
-        public const string NotificationHubName = "KHUNotifications";
+        public const string NotificationHubName = "khunotifications";
     }
 }

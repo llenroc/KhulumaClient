@@ -29,8 +29,8 @@
     <ContentPage.Content>
 
         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
-
-            <ListView x:Name="chatListView" HasUnevenRows="True" ItemTemplate="{StaticResource TemplateSelector}">
+            <ActivityIndicator x:Name="loadingChats" Color="Red" IsRunning="true" />
+            <ListView x:Name="chatListView" HasUnevenRows="True" ItemTemplate="{StaticResource TemplateSelector}" SeparatorVisibility="None">
                 <!--<ListView.ItemTemplate>
 
                     <DataTemplate>

@@ -12,35 +12,29 @@ namespace KhulumaClient
 		{
 			InitializeComponent();
 
+           
+            bool debug_mode = false;
+            bool registered = Helpers.Settings.isRegistered;
 
-			bool debug_mode = false;
-
-
-			if (debug_mode == true)
+            if (debug_mode)
 			{
 
-				//Helpers.Settings.Username = "Debugger";
-			
-
-				MainPage = new NavigationPage(new DataPage());
+				MainPage = new NavigationPage(new SettingsPage());
 
 			}
 			else {
 
+                if (registered)
+                {
+                    MainPage = new NavigationPage(new GroupChatPage());
+                }
+                else
+                {
 
-				if (Helpers.Settings.isRegistered == true)
-				{
-
-					MainPage = new NavigationPage(new GroupChatPage());
-
-				}
-				else
-				{
-
-                    //MainPage = new NavigationPage(new RegisterPage());
                     MainPage = new NavigationPage(new IntroPage());
+                }
 
-				}
+               
 
 			}
 

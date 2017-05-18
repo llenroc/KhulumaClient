@@ -7,24 +7,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace KhulumaClient.Views
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class IntroPage : CarouselPage
+    public partial class SettingsPage : TabbedPage
     {
-        public IntroPage()
+        public SettingsPage()
         {
             InitializeComponent();
-
-            
-        }
-
-        private void Register_Clicked(object sender, EventArgs e)
-        {
-            Page newpage = new RegisterPage();
-            Navigation.PushAsync(newpage);
-            //Navigation.PushModalAsync(newpage);
+            Children.Add(new SettingsPageTab1());
         }
     }
 }

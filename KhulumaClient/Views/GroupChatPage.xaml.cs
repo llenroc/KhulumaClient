@@ -8,6 +8,7 @@ using Microsoft.AspNet.SignalR.Client;
 using Xamarin.Forms;
 using KhulumaClient.Views;
 using System.Text.RegularExpressions;
+using KhulumaClient.Contracts;
 
 namespace KhulumaClient
 {
@@ -34,6 +35,9 @@ namespace KhulumaClient
 		{
 			InitializeComponent();
             isFlagged = false;
+            string tokenID = DependencyService.Get<IFireBase>().GetTokenID();
+
+
 
             thisUser = new userModel();
 
@@ -57,22 +61,28 @@ namespace KhulumaClient
 			
 
 
-            chatHubProxy.On<string, string, string, int>("addNewMessageToPage", (name, message, timestamp, groupid) =>
+            chatHubProxy.On<string, string, string, int[]>("addNewMessageToPage", (name, message, timestamp, idVals) =>
 			{
+                var groupid = idVals[0];
+                var userid = idVals[1];
 
                 if (groupid == thisUser.GroupId)
                 {
                     
-                    displayChat(name, timestamp, message);
+                    displayChat(name, timestamp, message, userid);
                 }
 
-                
-			});
+                var target = chatItems[chatItems.Count - 1];
+
+                chatListView.ScrollTo(target, ScrollToPosition.End, true);
+
+            });
 
 			chatHubProxy.On<string, string, string>("quartzJobExecuted", (name, message, hournow) =>
 			{
-	
-				displayChat(name, message, hournow);
+
+                var userid = 0;
+                displayChat(name, message, hournow, userid);
 
 
 			});
@@ -117,7 +127,7 @@ namespace KhulumaClient
 
             void OnTextChanged(object sender, EventArgs e)
             {
-
+                isFlagged = false;
                 var restrictCount = 250;
                 String val = MessageBox.Text; //Get Current Text
 
@@ -177,6 +187,7 @@ namespace KhulumaClient
 
 
             var groupID = thisUser.GroupId;
+            DependencyService.Get<IFireBase>().SubscribeToNotifications(groupID.ToString());
             Debug.WriteLine("THIS User GroupID: {0}", thisUser.GroupId);
 
             if (groupID == 0)
@@ -205,9 +216,9 @@ namespace KhulumaClient
                         chatItems.Add(chat);
                     }
 
-                 
 
 
+                    
 
                 }
 
@@ -218,7 +229,7 @@ namespace KhulumaClient
                 var target = chatItems[chatItems.Count - 1];
 
                 chatListView.ScrollTo(target, ScrollToPosition.End, true);
-
+                loadingChats.IsRunning = false;
             }
 
 
@@ -253,7 +264,7 @@ namespace KhulumaClient
 			}
 
 		}
-		public void displayChat(string name, string time, string message)
+		public void displayChat(string name, string time, string message, int userid)
 		{
 
             Debug.WriteLine("CHAT: {0} : {1} ::: {2} :", name, time, message);
@@ -262,7 +273,8 @@ namespace KhulumaClient
 			{
 				Name = name,
 				Message = message,
-				MessageTimestamp = time
+				MessageTimestamp = time,
+                UserId = userid
 
 			});
 

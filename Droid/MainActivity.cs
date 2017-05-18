@@ -1,26 +1,27 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Util;
-using Gcm.Client;
+using Android.Gms.Common;
+using Firebase.Messaging;
+using Firebase.Iid;
+using Firebase;
 
 namespace KhulumaClient.Droid
 {
-	[Activity(Label = "KhulumaClient.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "KhulumaClient.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 
         public static MainActivity instance;
+        const string TAG = "MainActivity";
 
+        
         protected override void OnCreate(Bundle bundle)
 		{
-
+            var thisContext = Application.ApplicationContext;
             instance = this;
 
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -32,26 +33,43 @@ namespace KhulumaClient.Droid
 
 			LoadApplication(new App());
 
+            //FirebaseApp app = FirebaseApp.InitializeApp(this);
+            FirebaseApp.InitializeApp(Application.Context);
 
-			var x = typeof(Xamarin.Forms.Themes.DarkThemeResources);
+
+            var x = typeof(Xamarin.Forms.Themes.DarkThemeResources);
 			x = typeof(Xamarin.Forms.Themes.LightThemeResources);
 			x = typeof(Xamarin.Forms.Themes.Android.UnderlineEffect);
 
+            IsPlayServicesAvailable();
 
-            //RegisterWithGCM();
-
+           
+            
         }
 
-        private void RegisterWithGCM()
+        public bool IsPlayServicesAvailable()
         {
-            // Check to ensure everything's set up right
-            GcmClient.CheckDevice(this);
-            GcmClient.CheckManifest(this);
-
-            // Register for push notifications
-            Log.Info("MainActivity", "Registering...");
-            GcmClient.Register(this, Constants.SenderID);
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            string googleAPIResultText;
+            if (resultCode != ConnectionResult.Success)
+            {
+                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                    googleAPIResultText = GoogleApiAvailability.Instance.GetErrorString(resultCode);
+                else
+                {
+                    googleAPIResultText = "This device is not supported";
+                    Finish();
+                }
+                return false;
+            }
+            else
+            {
+                googleAPIResultText = "Google Play Services is available.";
+                return true;
+            }
         }
+
+
 
     }
 }

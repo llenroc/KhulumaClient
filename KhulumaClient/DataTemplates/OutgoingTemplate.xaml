@@ -4,6 +4,27 @@
              x:Class="KhulumaClient.DataTemplates.OutgoingTemplate"
              xmlns:local="clr-namespace:KhulumaClient;assembly=KhulumaClient">
 
-    <Label Text="test" />
+    <Frame HasShadow="True" BackgroundColor="AliceBlue" OutlineColor="AntiqueWhite"  Padding="8" Margin="30,10,0,0" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+
+
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="1" />
+            <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
+
+        </Grid>
+    </Frame>
+
+
 
 </ViewCell>

@@ -2,6 +2,7 @@
 using KhulumaClient.Views;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -83,7 +84,12 @@ namespace KhulumaClient
             {
                 await DisplayAlert("Alert", "Please fill in all fields", "OK");
                 buttonSave.IsEnabled = true;
-            } else
+            } else if (!isValidEmail(appUser.Email))
+            {
+                await DisplayAlert("Alert", "Please fill in a valid email address", "OK");
+                buttonSave.IsEnabled = true;
+            }
+                else
             {
                 await restService.PostUser(appUser);
 
@@ -126,6 +132,18 @@ namespace KhulumaClient
         {
             await Navigation.PushAsync(new GroupChatPage());
 
+        }
+
+        public static bool isValidEmail(string inputEmail)
+        {
+            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                  @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                  @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+            Regex re = new Regex(strRegex);
+            if (re.IsMatch(inputEmail))
+                return (true);
+            else
+                return (false);
         }
 
 

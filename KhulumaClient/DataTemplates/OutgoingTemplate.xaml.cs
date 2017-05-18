@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace KhulumaClient.DataTemplates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OutgoingTemplate : ContentPage
+    public partial class OutgoingTemplate
     {
         public OutgoingTemplate()
         {
