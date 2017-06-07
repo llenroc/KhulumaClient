@@ -14,8 +14,8 @@ using Android.Widget;
 namespace KhulumaClient.Droid
 {
 	[Activity(Theme="@style/Theme.Splash",
-	         MainLauncher=true,
-	          NoHistory=true)]
+             MainLauncher = true,
+              NoHistory =true)]
 	public class SplashActivity : Activity
 	{
 

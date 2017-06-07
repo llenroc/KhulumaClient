@@ -5,28 +5,37 @@
              xmlns:local="clr-namespace:KhulumaClient;assembly=KhulumaClient">
 
 
-    <Frame HasShadow="True" BackgroundColor="AntiqueWhite" OutlineColor="Aquamarine" Padding="8" Margin="0,10,30,0">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="10" />
 
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,15,0">
+        
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="10" />
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+
+
+                </Grid.ColumnDefinitions>
+
                 
+                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" TextColor="#000000" FontAttributes="Bold" />
 
-            </Grid.ColumnDefinitions>
+            <Frame Grid.Column="0" Grid.Row="2" HasShadow="True" BackgroundColor="#e5c7df" OutlineColor="Aquamarine" Padding="8">
+                <Label Text="{Binding Message}" LineBreakMode="WordWrap" />
+            </Frame>
 
-            <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" TextColor="#be76ae" FontAttributes="Bold" />
-            <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="2" />
+
             <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
-
         </Grid>
-    </Frame>    
+       
+    </StackLayout>
+    
     
    
  

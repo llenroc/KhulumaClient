@@ -10,7 +10,7 @@ namespace KhulumaClient
 		public static string Username = "user";
 		public static string Password = "pass";
 
-        public static string baseUri = "http://khulumaserver.azurewebsites.net";
+        public static string baseUri = "http://khulumalive.azurewebsites.net/";
         //public static string baseUri = "http://localhost:50927";
 
         

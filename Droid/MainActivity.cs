@@ -11,8 +11,8 @@ using Firebase;
 
 namespace KhulumaClient.Droid
 {
-    [Activity(Label = "KhulumaClient.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Label = "KhulumaClient.Droid", Icon = "@drawable/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 
         public static MainActivity instance;
@@ -32,14 +32,12 @@ namespace KhulumaClient.Droid
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 
 			LoadApplication(new App());
-
+            
             //FirebaseApp app = FirebaseApp.InitializeApp(this);
             FirebaseApp.InitializeApp(Application.Context);
 
 
-            var x = typeof(Xamarin.Forms.Themes.DarkThemeResources);
-			x = typeof(Xamarin.Forms.Themes.LightThemeResources);
-			x = typeof(Xamarin.Forms.Themes.Android.UnderlineEffect);
+        
 
             IsPlayServicesAvailable();
 

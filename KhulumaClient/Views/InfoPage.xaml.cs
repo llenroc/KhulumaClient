@@ -10,11 +10,14 @@ using Xamarin.Forms.Xaml;
 namespace KhulumaClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class IntroPage : ContentPage
+    public partial class InfoPage : ContentPage
     {
-        public IntroPage()
+        public InfoPage(string message)
         {
             InitializeComponent();
+
+            messageText.Text = message;
+
         }
     }
 }

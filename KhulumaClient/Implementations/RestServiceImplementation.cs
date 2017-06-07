@@ -36,7 +36,15 @@ namespace KhulumaClient
         public async Task<userModel> GetThisUser()
         {
             thisUser = new userModel();
-            var thisUserID = Helpers.Settings.id;
+
+            var userIDSetting = Helpers.Settings.id;
+
+            if (userIDSetting == 0)
+            {
+                userIDSetting = 1;
+            }
+
+            var thisUserID = userIDSetting;
             var uri = new Uri(string.Format(Constants.baseUri + Constants.apiAppUsersUrl + "/" + thisUserID));
 
             try
@@ -91,6 +99,12 @@ namespace KhulumaClient
 
             var userID = Helpers.Settings.id;
             var groupID = Helpers.Settings.GroupId;
+
+            if (userID == 0)
+            {
+                userID = 1;
+            }
+   
 
 
 

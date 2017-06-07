@@ -17,8 +17,8 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
 
-
-            <Label Text="A new user has been created with the following details:" FontSize="Large" HorizontalTextAlignment="Center" />
+            <Label Text="Thank you for registering. Your administrator will contact you once you have been assigned to a group." FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+            <Label Text="Your details have been saved as follows:" FontSize="Large" HorizontalTextAlignment="Center" />
 
             <Label Text="Username" />
             <Label Text="{Binding Username}" TextColor="Black" />

@@ -1,26 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KhulumaClient.Views.IntroPage"
              Title="Welcome to Khuluma">
-  <ContentPage x:Name="introMain">
-        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-      
-        <Label Text="Welcome to Khuluma support!" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" VerticalTextAlignment="Center" />
-        <Label HorizontalTextAlignment="Center" Text="Swipe right" />
+    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Padding="5">
+        <ContentView Padding="0,10,0,10">
+            <Image Source="app_image_welcome.png" />
+        </ContentView>
+        <ContentView Padding="0,10,0,10">
+            <Label Text="Welcome to Khuluma app. Khuluma app is a social platform run by the SHM Foundation that provides mobile phone support groups for those living with and affected by HIV. This app is for the Khuluma participants who take part in the Khuluma peer-to-peer support groups so that they can communicate amongst themselves and with a facilitator and a mentor about any topic that they find important to discuss." />
+        </ContentView>
+        <ContentView Padding="0,10,0,10">
+            <Label Text="Khuluma is here to give HIV positive young people the support they need to overcome stigma and social isolation and to support their mental health and well-being." />
+        </ContentView>
 
-           
-        </StackLayout>
-  </ContentPage>
-  <ContentPage>
-        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-
-            <Label Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." 
-                   HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" VerticalTextAlignment="Center" />
-
-            <Button Text="Register" Clicked="Register_Clicked"  />
-
-        </StackLayout>
-  </ContentPage>
-    
-</CarouselPage>
+        <ContentView Padding="10,30,10,30">
+            <Button VerticalOptions="Center" Text="CONTINUE" />
+        </ContentView>
+        
+        
+    </StackLayout>
+</ContentPage>

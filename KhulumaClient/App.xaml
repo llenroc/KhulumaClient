@@ -2,11 +2,17 @@
 <Application 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		xmlns:mytheme="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Light"
+		
 		x:Class="KhulumaClient.App">
 	<Application.Resources>
 
-		<ResourceDictionary MergedWith="mytheme:LightThemeResources" />
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#bcd138" />
+                <Setter Property="TextColor" Value="#65625d" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
 
-	</Application.Resources>
+    </Application.Resources>
 </Application>

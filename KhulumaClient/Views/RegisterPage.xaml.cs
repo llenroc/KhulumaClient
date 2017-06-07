@@ -2,6 +2,7 @@
 using KhulumaClient.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -104,16 +105,13 @@ namespace KhulumaClient
                     buttonSave.IsVisible = false;
                     buttonSave.IsEnabled = false;
 
-                    buttonGotoChat.IsEnabled = true;
-                    buttonGotoChat.IsVisible = true;
-                    
-
-                    userProfilePage = new UserProfilePage();
+                    /*userProfilePage = new ThankYouPage();
                     userProfilePage.BindingContext = appUser;
 
-                    await Navigation.PushModalAsync(userProfilePage);
-                    
+                    await Navigation.PushModalAsync(userProfilePage);*/
 
+                    Navigation.InsertPageBefore(new ThankYouPage(), Navigation.NavigationStack.First());
+                    await Navigation.PopToRootAsync(true);
 
                 }
                 else

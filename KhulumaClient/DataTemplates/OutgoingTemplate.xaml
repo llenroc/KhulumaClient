@@ -4,12 +4,14 @@
              x:Class="KhulumaClient.DataTemplates.OutgoingTemplate"
              xmlns:local="clr-namespace:KhulumaClient;assembly=KhulumaClient">
 
-    <Frame HasShadow="True" BackgroundColor="AliceBlue" OutlineColor="AntiqueWhite"  Padding="8" Margin="30,10,0,0" CornerRadius="10">
+    <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand"  VerticalOptions="CenterAndExpand" Margin="15,0,0,0">
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10" />
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="10" />
 
             </Grid.RowDefinitions>
@@ -19,11 +21,17 @@
 
             </Grid.ColumnDefinitions>
 
-            <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="1" />
-            <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
+            <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1" VerticalTextAlignment="Center" TextColor="#000000" FontAttributes="Bold" />
 
+            <Frame Grid.Column="0" Grid.Row="2" HasShadow="True" BackgroundColor="#e4ecb0" OutlineColor="Aquamarine" Padding="8">
+                <Label Text="{Binding Message}" LineBreakMode="WordWrap" />
+            </Frame>
+
+
+            <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="3" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
         </Grid>
-    </Frame>
+
+    </StackLayout>
 
 
 

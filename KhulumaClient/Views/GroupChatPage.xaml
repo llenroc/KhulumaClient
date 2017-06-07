@@ -5,75 +5,29 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-
             <local:TemplateSelector x:Key="TemplateSelector" />
-
-            <!--<Style x:Key="nameText" TargetType="Label">
-                
-                <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="HorizontalTextAlignment" Value="End" />
-                
-            </Style>
-            <Style x:Key="messageText" TargetType="Label">
-                
-                <Setter Property="TextColor" Value="Black" />
-                
-                <Setter Property="FontSize" Value="Medium" />
-            </Style>-->
-
-
-
 
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
 
         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
+            
             <ActivityIndicator x:Name="loadingChats" Color="Red" IsRunning="true" />
+            
             <ListView x:Name="chatListView" HasUnevenRows="True" ItemTemplate="{StaticResource TemplateSelector}" SeparatorVisibility="None">
-                <!--<ListView.ItemTemplate>
-
-                    <DataTemplate>
-
-                        <ViewCell>
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10" />
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="10" />
-
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-
-                                </Grid.ColumnDefinitions>
-
-                                <Label Text="{Binding Name}" Grid.Column="0" Grid.Row="1"  Style="{StaticResource nameText}" VerticalTextAlignment="Center" TextColor="#be76ae" />
-                                <Label Text="{Binding MessageTimestamp}" Grid.Column="0" Grid.Row="2" VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="#cccccc" FontSize="Small" />
-                                <Label Text="{Binding Message}" Grid.Column="0" Grid.Row="3" Style="{StaticResource messageText}" />
-
-                            </Grid>
-
-
-
-                        </ViewCell>
-
-
-
-                    </DataTemplate>
-
-
-                </ListView.ItemTemplate>-->
+              
 
 
             </ListView>
 
-            <Grid>
+
+
+            <Grid VerticalOptions="End" HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="*" />
+                    
 
 
 
@@ -84,16 +38,25 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Entry Grid.Column="0" Grid.Row="0" x:Name="MessageBox" Placeholder="Message..." Keyboard="Chat" />
-                <Button Grid.Column="1" Grid.Row="0" x:Name="SendButton" Text="Send" />
+
+
+                <StackLayout Grid.Column="0" Grid.Row="1">
+                    <Editor x:Name="MessageBox" Keyboard="Chat" />
+                </StackLayout>
+                <StackLayout Grid.Column="1" Grid.Row="1">
+                    <Button x:Name="SendButton" Text="Send" />
+                </StackLayout>
+
+
+
+                
+                <Label Grid.Column="0" Grid.Row="0" x:Name="msgCharCounter" />
 
             </Grid>
 
 
-
-
         </StackLayout>
-
+        
 
     </ContentPage.Content>
 </ContentPage>

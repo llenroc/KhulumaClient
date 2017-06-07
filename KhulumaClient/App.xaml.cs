@@ -1,4 +1,5 @@
 ﻿using KhulumaClient.Views;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -8,30 +9,34 @@ namespace KhulumaClient
 	public partial class App : Application
 	{
 
-		public App()
+        public App()
 		{
 			InitializeComponent();
 
-           
+            
             bool debug_mode = false;
+
             bool registered = Helpers.Settings.isRegistered;
+            int groupID = Helpers.Settings.GroupId;
 
             if (debug_mode)
 			{
 
-				MainPage = new NavigationPage(new SettingsPage());
+				MainPage = new NavigationPage(new RegisterPage());
 
 			}
 			else {
 
                 if (registered)
                 {
+
+
                     MainPage = new NavigationPage(new GroupChatPage());
                 }
                 else
                 {
 
-                    MainPage = new NavigationPage(new IntroPage());
+                    MainPage = new NavigationPage(new RegisterPage());
                 }
 
                
@@ -57,6 +62,8 @@ namespace KhulumaClient
 		{
 			// Handle when your app resumes
 		}
+
+       
 
 
 	}

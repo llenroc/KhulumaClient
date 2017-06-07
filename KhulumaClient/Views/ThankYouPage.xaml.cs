@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace KhulumaClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class IntroPage : ContentPage
+    public partial class ThankYouPage : ContentPage
     {
-        public IntroPage()
+        public ThankYouPage()
         {
             InitializeComponent();
         }
