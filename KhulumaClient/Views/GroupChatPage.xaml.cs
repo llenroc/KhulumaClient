@@ -132,8 +132,7 @@ namespace KhulumaClient
 
                     val = output;
 
-
-
+                
                 }
 
                 if (val.Contains("****")) isFlagged = true;
@@ -224,11 +223,18 @@ namespace KhulumaClient
 
             
           
+            try
+            {
+                DependencyService.Get<IFireBase>().SubscribeToNotifications(groupID.ToString());
+            }
+            catch (Exception ex)
+            {
 
+            }
            
            
             
-            DependencyService.Get<IFireBase>().SubscribeToNotifications(groupID.ToString());
+           
             Debug.WriteLine("THIS User GroupID: {0}", thisUser.GroupId);
 
             if (groupID == 1)

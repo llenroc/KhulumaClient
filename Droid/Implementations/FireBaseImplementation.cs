@@ -29,9 +29,18 @@ namespace KhulumaClient.Droid.Implementations
         string firebaseToken;
         public string GetTokenID()
         {
-            firebaseToken = FirebaseInstanceId.Instance.Token;
-            Log.Debug(TAG, "InstanceID token: " + firebaseToken);
-            return firebaseToken;
+            try
+            {
+                firebaseToken = FirebaseInstanceId.Instance.Token;
+                Log.Debug(TAG, "InstanceID token: " + firebaseToken);
+                return firebaseToken;
+            }
+            catch (Exception ex)
+            {
+                return "Error";
+            }
+            
+            
             
         }
 

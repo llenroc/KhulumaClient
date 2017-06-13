@@ -33,7 +33,7 @@ namespace KhulumaClient.Droid
 
 			LoadApplication(new App());
             
-            //FirebaseApp app = FirebaseApp.InitializeApp(this);
+           
             FirebaseApp.InitializeApp(Application.Context);
 
 

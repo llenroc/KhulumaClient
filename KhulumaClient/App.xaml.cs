@@ -22,7 +22,7 @@ namespace KhulumaClient
             if (debug_mode)
 			{
 
-				MainPage = new NavigationPage(new RegisterPage());
+				MainPage = new NavigationPage(new ThankYouPage());
 
 			}
 			else {

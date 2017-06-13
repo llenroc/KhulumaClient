@@ -15,6 +15,9 @@ namespace KhulumaClient.Views
         public ThankYouPage()
         {
             InitializeComponent();
+
+            thankyouImage.Aspect = Aspect.AspectFit;
+            thankyouImage.Source = ImageSource.FromResource("KhulumaClient.thankyoupage.png");
         }
     }
 }

@@ -133,13 +133,11 @@ namespace KhulumaClient
 
 
 		//Create App User Account
-		public async Task PostUser(PostUserModel user)
+		public async Task<AppUserModel> PostUser(PostUserModel user)
 		{
 			Debug.WriteLine("Post User: ");
             
 			AppUserModel responseAppUser = new AppUserModel();
-
-            
 
             var uri = new Uri(string.Format(Constants.baseUri + Constants.apiAppUsersUrl, string.Empty));
 
@@ -179,9 +177,6 @@ namespace KhulumaClient
 
 				}
 
-				
-
-
 
 			}
 			catch (Exception ex)
@@ -189,8 +184,8 @@ namespace KhulumaClient
 				Debug.WriteLine(@"ERROR: ", ex.Message);
 			}
 
-
-		}
+            return responseAppUser;
+        }
 
 		public async Task<List<MobilePageModel>> GetMobilePagesAsync()
 		{

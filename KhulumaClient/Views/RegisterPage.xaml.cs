@@ -92,25 +92,17 @@ namespace KhulumaClient
             }
                 else
             {
-                await restService.PostUser(appUser);
+                appTestUser = await restService.PostUser(appUser);
 
                 if (Helpers.Settings.isRegistered == true)
                 {
-                    //RegisterFormBox.IsVisible = false;
-                    //RegisterFormBox.IsEnabled = false;
-
-                    //SubmissionBox.IsVisible = true;
-                    //SubmissionBox.IsEnabled = true;
 
                     buttonSave.IsVisible = false;
                     buttonSave.IsEnabled = false;
 
-                    /*userProfilePage = new ThankYouPage();
-                    userProfilePage.BindingContext = appUser;
+                    var thankYouPage = new NavigationPage(new ThankYouPage());
 
-                    await Navigation.PushModalAsync(userProfilePage);*/
-
-                    Navigation.InsertPageBefore(new ThankYouPage(), Navigation.NavigationStack.First());
+                    Navigation.InsertPageBefore(thankYouPage, Navigation.NavigationStack.First());
                     await Navigation.PopToRootAsync(true);
 
                 }
