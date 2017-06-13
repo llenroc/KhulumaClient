@@ -10,10 +10,11 @@ using KhulumaClient.Views;
 using System.Text.RegularExpressions;
 using KhulumaClient.Contracts;
 
+
 namespace KhulumaClient
 {
 	public partial class GroupChatPage : ContentPage
-	{
+    {
 
 		public ObservableCollection<ChatModel> chatItems { get; set; }
         public string ChatGroupName { get; set; }
@@ -186,7 +187,7 @@ namespace KhulumaClient
                    
                     val = sub;
                 }
-                msgCharCounter.Text = val.Length.ToString();
+                //msgCharCounter.Text = val.Length.ToString();
 
             }
 
@@ -285,8 +286,8 @@ namespace KhulumaClient
                 var target = chatItems[chatItems.Count - 1];
 
                 chatListView.ScrollTo(target, ScrollToPosition.End, true);
-                loadingChats.IsRunning = false;
-                loadingChats.IsVisible = false;
+                //loadingChats.IsRunning = false;
+                //loadingChats.IsVisible = false;
             }
 
 

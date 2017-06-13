@@ -11,51 +11,40 @@
     </ContentPage.Resources>
     <ContentPage.Content>
 
-        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="5">
-            
-            <ActivityIndicator x:Name="loadingChats" Color="Red" IsRunning="true" />
-            
-            <ListView x:Name="chatListView" HasUnevenRows="True" ItemTemplate="{StaticResource TemplateSelector}" SeparatorVisibility="None">
-              
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
+            <ListView 
+                Grid.Row="0"
+                x:Name="chatListView" 
+                HasUnevenRows="True" 
+                ItemTemplate="{StaticResource TemplateSelector}" 
+                SeparatorVisibility="None" />
 
-            </ListView>
-
-
-
-            <Grid VerticalOptions="End" HorizontalOptions="CenterAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="15" />
-                    <RowDefinition Height="*" />
-                    
-
-
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="*" />
-
-                </Grid.ColumnDefinitions>
-
-
-
-                <StackLayout Grid.Column="0" Grid.Row="1">
-                    <Editor x:Name="MessageBox" Keyboard="Chat" />
-                </StackLayout>
-                <StackLayout Grid.Column="1" Grid.Row="1">
-                    <Button x:Name="SendButton" Text="Send" />
-                </StackLayout>
+            <!-- Entry and Send button in Row 1 -->
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
+                <Entry 
+			    HorizontalOptions="FillAndExpand" 
+				HeightRequest="25" 
+				Placeholder="Message" 
+				x:Name="MessageBox"/>
+                <Button 
+                    x:Name="SendButton"
+				    Text="Send" 
+				    />
+            </StackLayout>
 
 
 
-                
-                <Label Grid.Column="0" Grid.Row="0" x:Name="msgCharCounter" />
-
-            </Grid>
 
 
-        </StackLayout>
+        </Grid>
+
+        
+       
         
 
     </ContentPage.Content>
