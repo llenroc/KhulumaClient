@@ -100,7 +100,7 @@ namespace KhulumaClient
                     buttonSave.IsVisible = false;
                     buttonSave.IsEnabled = false;
 
-                    var thankYouPage = new NavigationPage(new ThankYouPage());
+                    var thankYouPage = new ThankYouPage();
 
                     Navigation.InsertPageBefore(thankYouPage, Navigation.NavigationStack.First());
                     await Navigation.PopToRootAsync(true);

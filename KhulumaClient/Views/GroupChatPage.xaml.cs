@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using Xamarin.Forms;
 using KhulumaClient.Views;
-using System.Text.RegularExpressions;
 using KhulumaClient.Contracts;
-
 
 namespace KhulumaClient
 {
-	public partial class GroupChatPage : ContentPage
+    public partial class GroupChatPage : ContentPage
     {
 
 		public ObservableCollection<ChatModel> chatItems { get; set; }
@@ -40,7 +36,7 @@ namespace KhulumaClient
            
 
             isFlagged = false;
-            string tokenID = DependencyService.Get<IFireBase>().GetTokenID();
+            
            
             chatListView.ItemSelected += (sender, e) => {
                 ((ListView)sender).SelectedItem = null;
@@ -61,8 +57,6 @@ namespace KhulumaClient
             itemAbout.Clicked += itemMenuClicked;
 
 			ToolbarItems.Add(itemAbout);
-
-
 
 
             chatHubProxy = hubConnection.CreateHubProxy("ChatHub");
@@ -92,13 +86,14 @@ namespace KhulumaClient
                 var userid = 0;
                 displayChat(name, message, hournow, userid);
 
-
 			});
             
 			SendButton.Clicked += async (object sender, EventArgs e) =>
 			{
 
 				Debug.WriteLine("I've been clicked");
+
+                
 
                 if (MessageBox.Text=="") return;
 
@@ -157,7 +152,8 @@ namespace KhulumaClient
 				catch (Exception ex)
 				{
 					Debug.WriteLine("ERROR", ex.Message);
-				}
+                    startHub();
+                }
 
 				Debug.WriteLine("VARS: " + name + " " + message);
 
@@ -176,6 +172,7 @@ namespace KhulumaClient
             {
                 
                 var restrictCount = 250;
+                int totalChar = 0;
                 String val = MessageBox.Text; //Get Current Text
 
                 if (val.Length > restrictCount)//If it is more than your character restriction
@@ -187,7 +184,8 @@ namespace KhulumaClient
                    
                     val = sub;
                 }
-                //msgCharCounter.Text = val.Length.ToString();
+                totalChar = restrictCount - val.Length;
+                messageCounter.Text = totalChar + " Characters left";
 
             }
 
@@ -226,11 +224,12 @@ namespace KhulumaClient
           
             try
             {
-                DependencyService.Get<IFireBase>().SubscribeToNotifications(groupID.ToString());
+             
+                DependencyService.Get<IFireBase>().FCMSubscribe(groupID.ToString());
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine(@"", ex.InnerException);
             }
            
            
@@ -240,6 +239,7 @@ namespace KhulumaClient
 
             if (groupID == 1)
             {
+                messageInputBox.IsVisible = false;
                 await DisplayAlert("Alert", "You have not been assigned to a group yet, please contact your administrator", "OK");
             }
             else
@@ -271,11 +271,7 @@ namespace KhulumaClient
                         }
                     }
 
-                  
-
-
-
-                    
+                 
 
                 }
 
@@ -286,8 +282,7 @@ namespace KhulumaClient
                 var target = chatItems[chatItems.Count - 1];
 
                 chatListView.ScrollTo(target, ScrollToPosition.End, true);
-                //loadingChats.IsRunning = false;
-                //loadingChats.IsVisible = false;
+
             }
 
 

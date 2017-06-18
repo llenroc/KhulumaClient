@@ -1,12 +1,10 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.Content.PM;
-using Android.Widget;
 using Android.OS;
-using Android.Util;
 using Android.Gms.Common;
 using Firebase.Messaging;
 using Firebase.Iid;
+using Android.Util;
 using Firebase;
 
 namespace KhulumaClient.Droid
@@ -18,11 +16,15 @@ namespace KhulumaClient.Droid
         public static MainActivity instance;
         const string TAG = "MainActivity";
 
-        
+
         protected override void OnCreate(Bundle bundle)
 		{
             var thisContext = Application.ApplicationContext;
             instance = this;
+            
+            IsPlayServicesAvailable();
+
+            
 
             TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;
@@ -32,17 +34,19 @@ namespace KhulumaClient.Droid
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 
 			LoadApplication(new App());
-            
+
+            FirebaseApp.InitializeApp(this);
+
+            Log.Debug(TAG, "InstanceID token: " + FirebaseInstanceId.Instance.Token);
+
            
-            FirebaseApp.InitializeApp(Application.Context);
 
+        }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
         
-
-            IsPlayServicesAvailable();
-
-           
-            
         }
 
         public bool IsPlayServicesAvailable()
@@ -56,6 +60,7 @@ namespace KhulumaClient.Droid
                 else
                 {
                     googleAPIResultText = "This device is not supported";
+                    Log.Debug(TAG, "Refreshed token: " + googleAPIResultText);
                     Finish();
                 }
                 return false;
@@ -63,6 +68,7 @@ namespace KhulumaClient.Droid
             else
             {
                 googleAPIResultText = "Google Play Services is available.";
+                Log.Debug(TAG, "Refreshed token: " + googleAPIResultText);
                 return true;
             }
         }

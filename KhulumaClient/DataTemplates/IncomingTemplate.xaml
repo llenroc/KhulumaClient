@@ -6,7 +6,7 @@
 
 
 
-    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,15,0">
+    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="5,0,15,0">
         
             <Grid>
                 <Grid.RowDefinitions>

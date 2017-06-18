@@ -22,7 +22,7 @@ namespace KhulumaClient
             if (debug_mode)
 			{
 
-				MainPage = new NavigationPage(new ThankYouPage());
+				MainPage = new NavigationPage(new SettingsPageTab1());
 
 			}
 			else {
@@ -36,7 +36,7 @@ namespace KhulumaClient
                 else
                 {
 
-                    MainPage = new NavigationPage(new RegisterPage());
+                    MainPage = new NavigationPage(new IntroPage());
                 }
 
                

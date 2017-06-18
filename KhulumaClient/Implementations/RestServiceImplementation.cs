@@ -128,6 +128,14 @@ namespace KhulumaClient
 				Debug.WriteLine(@"ERROR: {0}", ex.Message);
 			}
 
+            if (Chats.Count < 1)
+            {
+                Chats.Add(new ChatModel() {
+                    Name="Khuluma",
+                    Message="Welcome to the group, there are no messages yet."
+                });
+            }
+
 			return Chats;
 		}
 

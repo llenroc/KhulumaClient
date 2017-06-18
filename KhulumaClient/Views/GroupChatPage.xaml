@@ -15,6 +15,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <ListView 
@@ -24,17 +25,30 @@
                 ItemTemplate="{StaticResource TemplateSelector}" 
                 SeparatorVisibility="None" />
 
+
+            <StackLayout Orientation="Vertical" Grid.Row="1">
+                <ContentView Padding="5,0,5,0">
+                    <Label x:Name="messageCounter" FontSize="Small" />
+                </ContentView>
+                
+                <BoxView Color="#a1a1a1" HeightRequest="2" HorizontalOptions="FillAndExpand"></BoxView>
+            </StackLayout>
             <!-- Entry and Send button in Row 1 -->
-            <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
-                <Entry 
+            <StackLayout x:Name="messageInputBox" Orientation="Horizontal" Grid.Row="2" Padding="10,10,10,10" BackgroundColor="#ffffff">
+                
+                <Entry
+                    Keyboard="Chat"
 			    HorizontalOptions="FillAndExpand" 
 				HeightRequest="25" 
 				Placeholder="Message" 
 				x:Name="MessageBox"/>
-                <Button 
+                <ContentView Padding="0,5,0,5">
+                    <Button 
                     x:Name="SendButton"
 				    Text="Send" 
 				    />
+                </ContentView>
+                
             </StackLayout>
 
 

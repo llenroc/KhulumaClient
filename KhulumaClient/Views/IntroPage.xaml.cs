@@ -15,6 +15,15 @@ namespace KhulumaClient.Views
         public IntroPage()
         {
             InitializeComponent();
+            introPageImage.Aspect = Aspect.AspectFit;
+            introPageImage.Source = ImageSource.FromResource("KhulumaClient.intropage.png");
+
+            buttonContinue.Clicked += continueClicked;
+        }
+
+        private async void continueClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
         }
     }
 }
