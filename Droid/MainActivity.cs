@@ -37,7 +37,8 @@ namespace KhulumaClient.Droid
 
             FirebaseApp.InitializeApp(this);
 
-            Log.Debug(TAG, "InstanceID token: " + FirebaseInstanceId.Instance.Token);
+          
+
 
            
 

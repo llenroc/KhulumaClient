@@ -116,7 +116,7 @@ namespace KhulumaClient
                 /*****************************/
                 /*****************************/
                 isFlagged = false;
-                var restrictCount = 250;
+                
                 String val = MessageBox.Text; //Get Current Text
                 String output;
                 foreach (var item in flaggedStringList)
@@ -201,11 +201,13 @@ namespace KhulumaClient
             int chatsCount = 0;
             int totalChats = 0;
             int groupID;
+            int currentGroupID;
 
             chatItems = new ObservableCollection<ChatModel>();
             
             thisUser = await restService.GetThisUser();
             groupID = thisUser.GroupId;
+            currentGroupID = Helpers.Settings.GroupId;
             Helpers.Settings.GroupId = groupID;
             Chats = await restService.GetChatsAsync();
 
@@ -225,7 +227,7 @@ namespace KhulumaClient
             try
             {
              
-                DependencyService.Get<IFireBase>().FCMSubscribe(groupID.ToString());
+                DependencyService.Get<IFireBase>().FCMSubscribe(currentGroupID.ToString(), groupID.ToString());
             }
             catch (Exception ex)
             {
