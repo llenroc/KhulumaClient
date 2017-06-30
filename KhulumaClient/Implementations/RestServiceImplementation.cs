@@ -169,7 +169,7 @@ namespace KhulumaClient
 					Debug.WriteLine("Returned User: {0}, ID: {1}", responseAppUser.Name, responseAppUser.ID);
 
 					Helpers.Settings.GeneralSettings = "test";
-					KhulumaClient.Helpers.Settings.id = responseAppUser.ID;
+					Helpers.Settings.id = responseAppUser.ID;
 					Helpers.Settings.Username = responseAppUser.Username;
 					Helpers.Settings.Name = responseAppUser.Name;
 					Helpers.Settings.Surname = responseAppUser.Surname;

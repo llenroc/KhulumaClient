@@ -102,6 +102,10 @@ namespace KhulumaClient
 
                     var thankYouPage = new ThankYouPage();
 
+
+                  
+
+
                     Navigation.InsertPageBefore(thankYouPage, Navigation.NavigationStack.First());
                     await Navigation.PopToRootAsync(true);
 

@@ -8,24 +8,15 @@ namespace KhulumaClient
 {
 	public partial class App : Application
 	{
-
+        bool registered;
+        int groupID;
         public App()
 		{
 			InitializeComponent();
 
-            
-            bool debug_mode = false;
 
-            bool registered = Helpers.Settings.isRegistered;
-            int groupID = Helpers.Settings.GroupId;
-
-            if (debug_mode)
-			{
-
-				MainPage = new NavigationPage(new SettingsPageTab1());
-
-			}
-			else {
+            registered = Helpers.Settings.isRegistered;
+            groupID = Helpers.Settings.GroupId;
 
                 if (registered)
                 {
@@ -39,13 +30,6 @@ namespace KhulumaClient
                     MainPage = new NavigationPage(new IntroPage());
                 }
 
-               
-
-			}
-
-
-
-
 		}
 
 		protected override void OnStart()
@@ -53,18 +37,43 @@ namespace KhulumaClient
 
 		}
 
-		protected override void OnSleep()
+		protected async override void OnSleep()
 		{
-			// Handle when your app sleeps
-		}
+            registered = Helpers.Settings.isRegistered;
+
+            if (registered)
+            {
+                // Handle when your app sleeps
+                var nav = MainPage.Navigation;
+
+                // you may want to clear the stack (history)
+                await nav.PopToRootAsync(true);
+            }
+            
+            
+           
+        }
 
 		protected override void OnResume()
 		{
-			// Handle when your app resumes
-		}
+            registered = Helpers.Settings.isRegistered;
+            groupID = Helpers.Settings.GroupId;
 
-       
+            // Handle when your app resumes
+            if (registered)
+            {
+                MainPage = new NavigationPage(new GroupChatPage());
+            }
+            else
+            {
+
+                
+            }
+
+        }
 
 
-	}
+
+
+    }
 }

@@ -16,6 +16,13 @@ namespace KhulumaClient.Views
         {
             InitializeComponent();
 
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
             thankyouImage.Aspect = Aspect.AspectFit;
             thankyouImage.Source = ImageSource.FromResource("KhulumaClient.thankyoupage.png");
         }

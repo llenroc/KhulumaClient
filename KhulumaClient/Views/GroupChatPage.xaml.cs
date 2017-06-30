@@ -90,11 +90,7 @@ namespace KhulumaClient
             
 			SendButton.Clicked += async (object sender, EventArgs e) =>
 			{
-
-				Debug.WriteLine("I've been clicked");
-
                 
-
                 if (MessageBox.Text=="") return;
 
 				int userid = Helpers.Settings.id;
@@ -163,10 +159,7 @@ namespace KhulumaClient
 
             MessageBox.TextChanged += OnTextChanged;
 
-            void EditorCompleted(object sender, EventArgs e)
-            {
-                var text = ((Editor)sender).Text; // sender is cast to an Editor to enable reading the `Text` property of the view.
-            }
+ 
 
             void OnTextChanged(object sender, EventArgs e)
             {
@@ -221,9 +214,7 @@ namespace KhulumaClient
                 flaggedStringList.Add(flag.ContentText);
             }
 
-
             
-          
             try
             {
              
