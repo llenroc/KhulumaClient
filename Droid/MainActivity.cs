@@ -6,6 +6,7 @@ using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
 using Firebase;
+using Android.Widget;
 
 namespace KhulumaClient.Droid
 {
@@ -13,13 +14,21 @@ namespace KhulumaClient.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 
-        public static MainActivity instance;
-        const string TAG = "MainActivity";
+        static MainActivity instance = null;
+        public static string TAG = "MainActivity";
+        // Return the current activity instance.
+        public static MainActivity CurrentActivity
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
 
         protected override void OnCreate(Bundle bundle)
 		{
-            var thisContext = Application.ApplicationContext;
+            
             instance = this;
             
             IsPlayServicesAvailable();
@@ -35,12 +44,8 @@ namespace KhulumaClient.Droid
 
 			LoadApplication(new App());
 
-            FirebaseApp.InitializeApp(this);
+            
 
-          
-
-
-           
 
         }
 
@@ -48,6 +53,13 @@ namespace KhulumaClient.Droid
         {
             base.OnResume();
         
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            FirebaseApp.InitializeApp(this);
+
         }
 
         public bool IsPlayServicesAvailable()

@@ -1,4 +1,5 @@
-﻿using KhulumaClient.Views;
+﻿using KhulumaClient.Contracts;
+using KhulumaClient.Views;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,14 +11,22 @@ namespace KhulumaClient
 	{
         bool registered;
         int groupID;
+        bool debug_mode;
         public App()
 		{
 			InitializeComponent();
 
+            debug_mode = false;
 
             registered = Helpers.Settings.isRegistered;
             groupID = Helpers.Settings.GroupId;
 
+            if (debug_mode)
+            {
+                MainPage = new NavigationPage(new GroupChatPage());
+            }
+            else
+            {
                 if (registered)
                 {
 
@@ -29,13 +38,16 @@ namespace KhulumaClient
 
                     MainPage = new NavigationPage(new IntroPage());
                 }
+            }
+               
 
 		}
 
 		protected override void OnStart()
 		{
-
-		}
+            
+            
+        }
 
 		protected async override void OnSleep()
 		{

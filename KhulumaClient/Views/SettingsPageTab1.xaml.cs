@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using KhulumaClient.Contracts;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace KhulumaClient.Views
@@ -12,16 +13,13 @@ namespace KhulumaClient.Views
 
            
 
-            logTokenButton.Clicked += (sender, e) =>
-            {
-                //string tokenID = DependencyService.Get<IFireBase>().GetTokenID();
-                //textTokenIDResponse.Text = tokenID;
-            };
-            subscribeButton.Clicked += (sender, e) =>
-            {
-                //DependencyService.Get<IFireBase>().SubscribeToNotifications("1");
-            };
+         
 
+        }
+
+        private void subscribeButton_Clicked(object sender, System.EventArgs e)
+        {
+            DependencyService.Get<IFireBase>().FCMSubscribe("1", "2");
         }
     }
 }

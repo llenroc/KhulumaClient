@@ -36,9 +36,6 @@
     <EmbeddedResource Include="Views\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\databasePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\GroupChatPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -78,11 +75,6 @@
     <Compile Include="Contracts\IRestService.cs" />
     <Compile Include="Implementations\RestServiceImplementation.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Contracts\ISQLite.cs" />
-    <Compile Include="Database\KhulumaDatabase.cs" />
-    <Compile Include="Views\databasePage.xaml.cs">
-      <DependentUpon>databasePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Views\GroupChatPage.xaml.cs">
       <DependentUpon>GroupChatPage.xaml</DependentUpon>

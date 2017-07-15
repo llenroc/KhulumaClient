@@ -92,7 +92,21 @@ namespace KhulumaClient
             }
                 else
             {
-                appTestUser = await restService.PostUser(appUser);
+
+                var responsePostUser = await restService.PostUser(appUser);
+
+                var responseType = responsePostUser.responseType;
+
+                if (responseType == ResponseType.Username)
+                {
+                    await DisplayAlert("Alert", "That username has already been taken, please choose another", "OK");
+                    inputUsername.Focus();
+                } else
+                {
+                    appTestUser = responsePostUser.appUser;
+                }
+
+                
 
                 if (Helpers.Settings.isRegistered == true)
                 {
@@ -112,7 +126,15 @@ namespace KhulumaClient
                 }
                 else
                 {
-                    await DisplayAlert("Alert", "There was a registration error, please try again. If the problem persists, please contact an administrator.", "OK");
+                    if (responseType == ResponseType.Username)
+                    {
+
+                    } else
+                    {
+                        await DisplayAlert("Alert", "There was a registration error, please try again. If the problem persists, please contact an administrator.", "OK");
+                    }
+
+                    
                     buttonSave.IsEnabled = true;
                 }
             }

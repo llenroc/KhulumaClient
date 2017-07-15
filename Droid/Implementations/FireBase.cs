@@ -6,6 +6,7 @@ using KhulumaClient.Droid.Implementations;
 using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
+using Firebase;
 
 [assembly: Dependency(typeof(FireBase))]
 namespace KhulumaClient.Droid.Implementations
@@ -13,10 +14,10 @@ namespace KhulumaClient.Droid.Implementations
     class FireBase : IFireBase
     {
         const string TAG = "MainActivity";
-        string currentTopic = "";
+        
         public void FCMSubscribe(string currentGroup, string khuGroup)
         {
-           
+            
             try
             {
                 Log.Debug(TAG, "InstanceID token: " + FirebaseInstanceId.Instance.Token);

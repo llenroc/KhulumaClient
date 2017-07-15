@@ -6,6 +6,6 @@
     <StackLayout>
         <Label x:Name="textTokenIDResponse" Text="..." />
         <Button x:Name="logTokenButton" Text="Log Token" />
-        <Button x:Name="subscribeButton" Text="Subscribe to Notifications" />
+        <Button x:Name="subscribeButton" Text="Subscribe to Notifications" Clicked="subscribeButton_Clicked" />
     </StackLayout>
 </ContentPage>

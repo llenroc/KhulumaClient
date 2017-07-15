@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using SQLite;
+
 
 namespace KhulumaClient
 {
     public class ChatModel
     {
-        [PrimaryKey]
+        
         public int ChatMessageAPIModelId { get; set; }
         public int UserId { get; set; }
         public int GroupId { get; set; }

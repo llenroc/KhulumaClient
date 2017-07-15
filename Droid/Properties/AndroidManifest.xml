@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.953" package="agency.fp.khuluma_client" android:installLocation="auto" android:versionCode="18">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.961" package="agency.fp.khuluma_client" android:installLocation="auto" android:versionCode="20">
 	<uses-sdk android:minSdkVersion="15" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Khuluma App" android:icon="@drawable/icon">

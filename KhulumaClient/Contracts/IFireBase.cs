@@ -8,6 +8,7 @@ namespace KhulumaClient.Contracts
 {
     public interface IFireBase
     {
+
         void FCMSubscribe(string currentGroup, string khuGroup);
     }
 }

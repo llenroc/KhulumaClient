@@ -141,12 +141,12 @@ namespace KhulumaClient
 
 
 		//Create App User Account
-		public async Task<AppUserModel> PostUser(PostUserModel user)
+		public async Task<StatusReportUser> PostUser(PostUserModel user)
 		{
 			Debug.WriteLine("Post User: ");
             
 			AppUserModel responseAppUser = new AppUserModel();
-
+            StatusReportUser statusReportUser = new StatusReportUser();
             var uri = new Uri(string.Format(Constants.baseUri + Constants.apiAppUsersUrl, string.Empty));
 
 			try
@@ -183,7 +183,20 @@ namespace KhulumaClient
 
 					Helpers.Settings.isRegistered = true;
 
-				}
+                    statusReportUser.appUser = responseAppUser;
+                    statusReportUser.responseType = ResponseType.OK;
+
+				} else
+                {
+                    if (response.ReasonPhrase == "Conflict")
+                    {
+
+                        statusReportUser.responseType = ResponseType.Username;
+                        
+                    }
+                }
+         
+             
 
 
 			}
@@ -192,7 +205,7 @@ namespace KhulumaClient
 				Debug.WriteLine(@"ERROR: ", ex.Message);
 			}
 
-            return responseAppUser;
+            return statusReportUser;
         }
 
 		public async Task<List<MobilePageModel>> GetMobilePagesAsync()
@@ -246,4 +259,17 @@ namespace KhulumaClient
 
         }
 	}
+
+    public class StatusReportUser
+    {
+        public ResponseType responseType { get; set; }
+        public AppUserModel appUser { get; set; }
+
+    }
+    public enum ResponseType
+    {
+        Username,
+        OK
+    }
+
 }

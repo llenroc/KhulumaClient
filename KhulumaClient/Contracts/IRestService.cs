@@ -18,7 +18,7 @@ namespace KhulumaClient
 
 
 		// Create user
-		Task<AppUserModel> PostUser(PostUserModel appuser);
+		Task<StatusReportUser> PostUser(PostUserModel appuser);
 
         // Get user
         Task<userModel> GetThisUser();
