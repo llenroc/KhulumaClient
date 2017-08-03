@@ -10,5 +10,6 @@ namespace KhulumaClient.Contracts
     {
 
         void FCMSubscribe(string currentGroup, string khuGroup);
+        void FCMUnsubscribe(string currentGroup);
     }
 }

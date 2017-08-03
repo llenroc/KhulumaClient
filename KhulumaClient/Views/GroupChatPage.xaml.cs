@@ -217,8 +217,10 @@ namespace KhulumaClient
             
             try
             {
-             
-                DependencyService.Get<IFireBase>().FCMSubscribe(currentGroupID.ToString(), groupID.ToString());
+
+                //DependencyService.Get<IFireBase>().FCMSubscribe(currentGroupID.ToString(), groupID.ToString());
+                DependencyService.Get<IFireBase>().FCMUnsubscribe(currentGroupID.ToString());
+                Helpers.Settings.GroupId = currentGroupID;
             }
             catch (Exception ex)
             {

@@ -2,11 +2,12 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Gms.Common;
-using Firebase.Messaging;
-using Firebase.Iid;
+
 using Android.Util;
-using Firebase;
-using Android.Widget;
+using Gcm.Client;
+using System;
+using Android.Gms.Iid;
+using Android.Gms.Gcm;
 
 namespace KhulumaClient.Droid
 {
@@ -14,7 +15,11 @@ namespace KhulumaClient.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 
+        // Create a new instance field for this activity.
         static MainActivity instance = null;
+
+
+        
         public static string TAG = "MainActivity";
         // Return the current activity instance.
         public static MainActivity CurrentActivity
@@ -28,12 +33,9 @@ namespace KhulumaClient.Droid
 
         protected override void OnCreate(Bundle bundle)
 		{
-            
-            instance = this;
-            
-            IsPlayServicesAvailable();
 
-            
+            // Set the current instance of MainActivity.
+            instance = this;
 
             TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;
@@ -44,9 +46,38 @@ namespace KhulumaClient.Droid
 
 			LoadApplication(new App());
 
-            
+            try
+            {
+                // Check to ensure everything's set up right
+                GcmClient.CheckDevice(this);
+                GcmClient.CheckManifest(this);
+
+                // Register for push notifications
+                System.Diagnostics.Debug.WriteLine("Registering...");
+                GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
+
+                
+
+            }
+            catch (Java.Net.MalformedURLException)
+            {
+                CreateAndShowDialog("There was an error creating the client. Verify the URL.", "Error");
+            }
+            catch (Exception e)
+            {
+                CreateAndShowDialog(e.Message, "Error");
+            }
 
 
+        }
+
+        private void CreateAndShowDialog(string message, string title)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.SetMessage(message);
+            builder.SetTitle(title);
+            builder.Create().Show();
         }
 
         protected override void OnResume()
@@ -58,7 +89,7 @@ namespace KhulumaClient.Droid
         protected override void OnStart()
         {
             base.OnStart();
-            FirebaseApp.InitializeApp(this);
+           
 
         }
 

@@ -16,7 +16,7 @@ namespace KhulumaClient.Views
         {
             InitializeComponent();
 
-            
+
         }
 
         protected override void OnAppearing()

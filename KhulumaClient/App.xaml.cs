@@ -1,14 +1,13 @@
 ﻿using KhulumaClient.Contracts;
 using KhulumaClient.Views;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace KhulumaClient
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
+	    public Boolean mIsInForegroundMode;
         bool registered;
         int groupID;
         bool debug_mode;
@@ -45,12 +44,15 @@ namespace KhulumaClient
 
 		protected override void OnStart()
 		{
-            
-            
-        }
+		    mIsInForegroundMode = true;
+
+
+		}
 
 		protected async override void OnSleep()
 		{
+		    var currentGroup = Helpers.Settings.GroupId.ToString();
+		    DependencyService.Get<IFireBase>().FCMSubscribe(groupID.ToString(),currentGroup);
             registered = Helpers.Settings.isRegistered;
 
             if (registered)
@@ -68,6 +70,7 @@ namespace KhulumaClient
 
 		protected override void OnResume()
 		{
+		    mIsInForegroundMode = true;
             registered = Helpers.Settings.isRegistered;
             groupID = Helpers.Settings.GroupId;
 
@@ -84,7 +87,10 @@ namespace KhulumaClient
 
         }
 
-
+	    public Boolean isInForeground()
+	    {
+	        return mIsInForegroundMode;
+	    }
 
 
     }
